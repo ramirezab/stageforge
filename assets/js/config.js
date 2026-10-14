@@ -5,6 +5,6 @@ window.SF_CONFIG = {
   buyUrl: "",
   // The Windows download (installer or zip of the commercial build), e.g. a GitHub release asset
   downloadUrl: "",
-  // Support address shown as "Contact" in the footer
-  supportEmail: "support@forgestage.app",
+  // The contact form posts here (license server, which e-mails the message to Forge Tools)
+  contactUrl: "https://license.forgestage.app/contact",
 };

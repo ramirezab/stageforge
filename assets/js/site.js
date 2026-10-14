@@ -53,9 +53,41 @@
   wire(".js-buy", cfg.buyUrl);
   if (!cfg.downloadUrl || !cfg.buyUrl)
     Array.prototype.forEach.call(document.querySelectorAll(".js-soon"), function (e) { e.classList.remove("hidden"); });
-  Array.prototype.forEach.call(document.querySelectorAll(".js-mail"), function (a) {
-    if (cfg.supportEmail) a.href = "mailto:" + cfg.supportEmail; else a.classList.add("hidden");
-  });
+
+  // contact form -> license server (POST /contact), which e-mails it to Forge Tools
+  var form = document.getElementById("contact-form");
+  if (form && cfg.contactUrl) {
+    var shownAt = Date.now();
+    var status = form.querySelector(".js-contact-status");
+    var button = form.querySelector("button[type=submit]");
+    var field = function (n) { return form.querySelector("[name=" + n + "]"); };
+    var say = function (key, isError) {
+      var m = document.querySelector('#contact-msgs [data-i18n="contact.' + key + '"]');
+      status.innerHTML = m ? m.innerHTML : "";
+      status.classList.toggle("error", !!isError);
+    };
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var email = field("email"), message = field("message");
+      if (!email.value.trim() || !email.checkValidity()) { say("bad_email", true); email.focus(); return; }
+      if (message.value.trim().length < 10) { say("short", true); message.focus(); return; }
+      button.disabled = true;
+      say("sending");
+      fetch(cfg.contactUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: field("name").value, email: email.value.trim(), topic: field("topic").value, message: message.value,
+                               website: field("website").value, ms: Date.now() - shownAt, lang: document.documentElement.lang }),
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (j.ok) { form.reset(); say("ok"); }
+          else say(r.status === 429 ? "too_many" : j.error === "bad_email" || j.error === "short" ? j.error : "error", true);
+        });
+      }).catch(function () { say("error", true); }).then(function () { button.disabled = false; });
+    });
+  } else if (form) {
+    form.classList.add("hidden");
+  }
 
   // compact header after scrolling
   var nav = document.querySelector(".nav");

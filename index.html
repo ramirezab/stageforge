@@ -263,12 +263,50 @@
       <details><summary data-i18n="faq.q10">Does one subscription cover Windows and Android?</summary><p data-i18n="faq.a10">No, they are separate purchases. The Windows subscription is sold through Lemon Squeezy and StageForge Pro for Android through Google Play, and each one is managed and cancelled in its own store.</p></details>
     </div>
   </section>
+
+  <section id="contact" class="section">
+    <div class="wrap contact">
+      <h2 data-i18n="contact.title">Contact us</h2>
+      <p class="contact-lead" data-i18n="contact.lead">Questions about StageForge, your license or a bug? Write to us and we will answer by e-mail.</p>
+      <form id="contact-form" class="contact-form card" novalidate>
+        <div class="row2">
+          <label><span data-i18n="contact.name">Name</span><input name="name" maxlength="100" autocomplete="name"></label>
+          <label><span data-i18n="contact.email">E-mail</span><input name="email" type="email" maxlength="120" autocomplete="email" required></label>
+        </div>
+        <label><span data-i18n="contact.topic">Topic</span>
+          <select name="topic">
+            <option value="general" data-i18n="contact.t.general">General question</option>
+            <option value="license" data-i18n="contact.t.license">License &amp; billing</option>
+            <option value="bug" data-i18n="contact.t.bug">Bug report</option>
+            <option value="android" data-i18n="contact.t.android">Android</option>
+            <option value="press" data-i18n="contact.t.press">Press &amp; partnerships</option>
+          </select>
+        </label>
+        <label><span data-i18n="contact.message">Message</span><textarea name="message" rows="6" maxlength="5000" required></textarea></label>
+        <label class="hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+        <div class="contact-foot">
+          <button class="btn btn-primary" type="submit" data-i18n="contact.send">Send message</button>
+          <p class="note js-contact-status" role="status" aria-live="polite"></p>
+        </div>
+        <p class="tiny" data-i18n="contact.privacy">We use your e-mail only to answer you. See the <a href="privacy.html">privacy policy</a>.</p>
+      </form>
+      <p class="note" data-i18n="contact.alt">You can also write to <a href="mailto:support@forgestage.app">support@forgestage.app</a>.</p>
+      <div id="contact-msgs" class="hidden">
+        <span data-i18n="contact.sending">Sending…</span>
+        <span data-i18n="contact.ok">Thank you! We got your message and will answer by e-mail.</span>
+        <span data-i18n="contact.bad_email">Please check your e-mail address.</span>
+        <span data-i18n="contact.short">Tell us a little more (at least 10 characters).</span>
+        <span data-i18n="contact.too_many">You sent several messages in a row. Please try again in an hour.</span>
+        <span data-i18n="contact.error">The message could not be sent. Try again or write to <a href="mailto:support@forgestage.app">support@forgestage.app</a>.</span>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="footer">
   <div class="wrap footer-inner">
     <div><img src="assets/img/logo.svg" alt="" width="28" height="28"> <span>© 2026 Forge Tools · Costa Rica</span></div>
-    <nav><a href="eula.html" data-i18n="foot.eula">License agreement</a><a href="privacy.html" data-i18n="foot.privacy">Privacy</a><a class="js-mail" href="#" data-i18n="foot.contact">Contact</a></nav>
+    <nav><a href="eula.html" data-i18n="foot.eula">License agreement</a><a href="privacy.html" data-i18n="foot.privacy">Privacy</a><a href="#contact" data-i18n="foot.contact">Contact</a></nav>
     <p class="tiny" data-i18n="foot.tm">StageForge is an independent product. Model names describe a style of sound and do not refer to third-party trademarks. ASIO and VST are trademarks of Steinberg Media Technologies GmbH. Android and Google Play are trademarks of Google LLC. Guitar Pro is a trademark of Arobas Music.</p>
   </div>
 </footer>
