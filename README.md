@@ -1,6 +1,7 @@
 # StageForge website
 
-Static site for **StageForge** (Forge Tools), served by GitHub Pages at <https://ramirezab.github.io/stageforge/>.
+Static site for **StageForge** (Forge Tools), served by GitHub Pages at <https://forgestage.app/> (custom domain: `CNAME`, DNS at Cloudflare;
+the old <https://ramirezab.github.io/stageforge/> redirects there).
 
 - English by default; Spanish and Portuguese via the EN / ES / PT switch (or `?lang=es`, `?lang=pt`).
   English text lives in `index.html`; translations in `assets/js/i18n.js` (same keys as the `data-i18n` attributes).
