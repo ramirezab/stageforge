@@ -51,8 +51,9 @@
   }
   wire(".js-download", cfg.downloadUrl);
   wire(".js-buy", cfg.buyUrl);
-  if (!cfg.downloadUrl || !cfg.buyUrl)
-    Array.prototype.forEach.call(document.querySelectorAll(".js-soon"), function (e) { e.classList.remove("hidden"); });
+  var soon = !cfg.downloadUrl ? ".js-soon" : !cfg.buyUrl ? ".js-soon-buy" : null;
+  if (soon)
+    Array.prototype.forEach.call(document.querySelectorAll(soon), function (e) { e.classList.remove("hidden"); });
 
   // contact form -> license server (POST /contact), which e-mails it to Forge Tools
   var form = document.getElementById("contact-form");
