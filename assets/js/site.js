@@ -59,6 +59,8 @@
   var form = document.getElementById("contact-form");
   if (form && cfg.contactUrl) {
     var shownAt = Date.now();
+    // opened from the app's CONTACT SUPPORT button: ?app=StageForge 0.4.1 (Windows 11)#contact
+    var fromApp = (new URLSearchParams(location.search).get("app") || "").slice(0, 100);
     var status = form.querySelector(".js-contact-status");
     var button = form.querySelector("button[type=submit]");
     var field = function (n) { return form.querySelector("[name=" + n + "]"); };
@@ -78,7 +80,7 @@
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: field("name").value, email: email.value.trim(), topic: field("topic").value, message: message.value,
-                               website: field("website").value, ms: Date.now() - shownAt, lang: document.documentElement.lang }),
+                               website: field("website").value, ms: Date.now() - shownAt, lang: document.documentElement.lang, app: fromApp }),
       }).then(function (r) {
         return r.json().catch(function () { return {}; }).then(function (j) {
           if (j.ok) { form.reset(); say("ok"); }
